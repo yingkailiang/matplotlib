@@ -18,6 +18,7 @@ def euclideanDistance(p,q,d):
     innerSum = 0
     for i in range(0,d):
         innerSum = innerSum + (p[i] - q[i])*(p[i] - q[i])
+    print "eu distance: ",math.sqrt(innerSum)
     return math.sqrt(innerSum)
 
 #max from array
@@ -38,34 +39,32 @@ def minInArray(a):
 
 #compute the variance
 def gema(maxv,minv):
+    if minv==0:
+	print "minv is zero"
+        return 9999999
     tmp = (maxv-minv)/minv 
+    print "max:",maxv,"minv:",minv,"tmp: ",tmp
     return math.log(tmp,2)
 
 #main function start here: 
-d = 100
-n = 100
-distance=[]
-for i in range (0,n):
-    point1 = genRand(d)
-    point2 = genRand(d)
-    distance.append(euclideanDistance(point1,point2,d))
-variance = gema(maxInArray(distance),minInArray(distance))
-
 fig = plt.figure()
 ax = fig.gca(projection='3d')
-colors = ('r', 'g', 'b', 'k')
-for c in colors:
-    #x = np.random.sample(20)
-    #y = np.random.sample(20)
-    x = d 
-    y = n  
-    z = variance 
-    #print "X:",x,",Y:",y 
-    #ax.scatter(x, y, 0, zdir='y', c=c)
-    ax.scatter(x, y, z, zdir='y', c=c)
+for d in range (1,101): 
+    for n in range (100,1001):
+	distance=[]
+	for i in range (0,n):
+    	    point1 = genRand(d)
+            #print "point1, x: ",point1[0]
+            point2 = genRand(d)
+            #print "point2, x: ",point2[0]
+            distance.append(euclideanDistance(point1,point2,d))
+        variance = gema(maxInArray(distance),minInArray(distance))
+        x = d 
+        y = n  
+        z = variance 
+        ax.scatter(x, y, z, zdir='y', c='b')
 ax.legend()
 ax.set_xlim3d(0, 1000)
 ax.set_ylim3d(0, 1000)
 ax.set_zlim3d(0, 1000)
-
 plt.show()
