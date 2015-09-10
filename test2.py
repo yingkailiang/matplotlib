@@ -13,7 +13,13 @@ def genRand(d):
  	#print "random number ",i,": ",r
     return result
 
-#p, q are coordinate array, d is the number of dimension 
+#hamming distance, p, q are coordinate array, d is the number of dimension 
+def hammingDistance(p,q,d):
+    innerSum = 0
+    for i in range(0,d):
+	innerSum= abs(p[i]-q[i]) 
+    return innerSum
+#euclidean Distance, p, q are coordinate array, d is the number of dimension 
 def euclideanDistance(p,q,d):
     innerSum = 0
     for i in range(0,d):
@@ -57,7 +63,7 @@ for d in range (1,101):
             #print "point1, x: ",point1[0]
             point2 = genRand(d)
             #print "point2, x: ",point2[0]
-            distance.append(euclideanDistance(point1,point2,d))
+            distance.append(hammingDistance(point1,point2,d))
         variance = gema(maxInArray(distance),minInArray(distance))
         x = d 
         y = n  
